@@ -26,7 +26,7 @@ function NavBar() {
                     </>
                     :
                     <>
-                        <span>{user}</span>
+
                         <button type="button" onClick={logout}>Log out</button>
                     </>
                 }
