@@ -1,19 +1,30 @@
 import React, {useContext, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AuthContext} from "../context/AuthContext";
+import axios from "axios";
 
 function SignIn() {
     const {login} = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    function handleSubmit(e) {
+   async function handleSubmit(e) {
         e.preventDefault();
-        console.log({
-            email: email,
-            password: password
-        })
-        login(email);
+
+        try {
+            const response = await axios.post(`http://localhost:3000/login`, {
+                email: email,
+                password: password,
+            })
+            console.log(response)
+            navigate("/profile");
+            login(response.data.accessToken)
+
+        } catch (e){
+            console.error(e)
+        }
+
     }
 
     return (
@@ -23,11 +34,22 @@ function SignIn() {
                 molestias qui quo unde?</p>
 
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email"><input id="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                                              name="emailadress" placeholder="Emailadres"/></label>
-                <label htmlFor="password"><input id="password" value={password}
-                                                 onChange={(e) => setPassword(e.target.value)} name="password"
-                                                 placeholder="Wachtwoord"/></label>
+                <label htmlFor="email">
+                    <input
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        name="emailadress"
+                        placeholder="Emailadres"/>
+                </label>
+                <label htmlFor="password">
+                    <input
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
+                        placeholder="Wachtwoord"/>
+                </label>
                 <button type="submit">Inloggen</button>
             </form>
 
