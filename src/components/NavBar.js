@@ -5,16 +5,14 @@ import {AuthContext} from "../context/AuthContext";
 
 function NavBar() {
     const navigate = useNavigate();
-    const {isAuth, logout, user} = React.useContext(AuthContext);
+    const {isAuth, logout, user} = useContext(AuthContext);
 
     return (
         <nav>
             <Link to="/">
           <span className="logo-container">
             <img src={logo} alt="logo"/>
-            <h3>
-              Banana Security
-            </h3>
+            <h3>Banana Security</h3>
           </span>
             </Link>
 
@@ -26,7 +24,7 @@ function NavBar() {
                     </>
                     :
                     <>
-
+                        <p>Hoi {user.username}!</p>
                         <button type="button" onClick={logout}>Log out</button>
                     </>
                 }

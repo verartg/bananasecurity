@@ -13,7 +13,6 @@ function AuthContextProvider({children}) {
     });
 
     useEffect(() => {
-
         const storedToken = localStorage.getItem("token")
         if (storedToken) {
             const decodedToken = jwtDecode(storedToken);
@@ -25,16 +24,13 @@ function AuthContextProvider({children}) {
                 status: 'done'
             })
         }
-
     }, [])
     const navigate = useNavigate();
 
     function login(jwt) {
         console.log('Gebruiker is ingelogd!');
-        console.log(jwt);
         localStorage.setItem('token', jwt);
         const decodedToken = jwtDecode(jwt);
-        console.log(decodedToken);
         fetchData(jwt, decodedToken.sub);
         navigate("/login");
     }
@@ -47,8 +43,6 @@ function AuthContextProvider({children}) {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(response)
-
             toggleIsAuth({
                 isAuth: true,
                 user: {
@@ -59,7 +53,6 @@ function AuthContextProvider({children}) {
                 status: 'done'
             });
             navigate('/profile');
-
         } catch (e) {
             console.error(e);
             toggleIsAuth({

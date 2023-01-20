@@ -4,16 +4,12 @@ import {AuthContext} from "../context/AuthContext";
 import axios from "axios";
 
 function Profile() {
-
     const [privateContent, setPrivateContent] = useState({});
-
     const {user} = useContext(AuthContext);
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token")
-
         async function getPersonalData() {
-
             try {
                 const response = await axios.get(`http://localhost:3000/660/private-content`, {
                     headers: {
@@ -26,9 +22,7 @@ function Profile() {
                 console.error(e)
             }
         }
-
         getPersonalData()
-
     }, [])
 
     return (

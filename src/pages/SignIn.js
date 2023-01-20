@@ -9,9 +9,8 @@ function SignIn() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-   async function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-
         try {
             const response = await axios.post(`http://localhost:3000/login`, {
                 email: email,
@@ -20,11 +19,9 @@ function SignIn() {
             console.log(response)
             navigate("/profile");
             login(response.data.accessToken)
-
-        } catch (e){
+        } catch (e) {
             console.error(e)
         }
-
     }
 
     return (

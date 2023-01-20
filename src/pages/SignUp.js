@@ -6,20 +6,18 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
-    const navigate =useNavigate();
+    const navigate = useNavigate();
+
     async function register(e) {
-
         e.preventDefault()
-
         try {
             const response = await axios.post(`http://localhost:3000/register`, {
                 email: email,
                 password: password,
                 username: username
             })
-            console.log(response)
             navigate("/signin");
-        } catch (e){
+        } catch (e) {
             console.error(e)
         }
     }
@@ -32,7 +30,7 @@ function SignUp() {
                 harum, numquam, placeat quisquam repellat rerum suscipit ullam vitae. A ab ad assumenda, consequuntur
                 deserunt
                 doloremque ea eveniet facere fuga illum in numquam quia reiciendis rem sequi tenetur veniam?</p>
-            <form onSubmit={register} >
+            <form onSubmit={register}>
                 <label htmlFor="username">gebruikersnaam
                     <input
                         type="text"
